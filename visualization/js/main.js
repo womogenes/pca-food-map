@@ -17,7 +17,7 @@ window.setup = () => {
   canvas.parent('#sketch-container');
 
   cam = createEasyCam();
-  cam.setRotationConstraint(false, false, false);
+  // cam.setRotationConstraint(true, false, false);
 
   textFont(latinModernRoman, 24);
 };
@@ -51,19 +51,17 @@ window.draw = () => {
 
   // Labels
   fill('#fff');
-  // let [camX, camY, camZ] = cam.getPosition();
+  let [camX, camY, camZ] = cam.getPosition();
 
-  // let [q0, q1, q2, q3] = cam.getRotation();
-  // let phi = Math.atan2(2 * (q0 * q1 + q2 * q3), 1 - 2 * (q1 * q1 + q2 * q2));
-  // let theta = Math.asin(2 * (q0 * q2 - q3 * q1));
-  // let psi = Math.atan2(2 * q0 * q3 + q1 * q2, 1 - 2 * (q2 * q2 + q3 * q3));
+  let [q0, q1, q2, q3] = cam.getRotation();
+  let phi = Math.atan2(2 * (q0 * q1 + q2 * q3), 1 - 2 * (q1 * q1 + q2 * q2));
+  let theta = Math.asin(2 * (q0 * q2 - q3 * q1));
+  let psi = Math.atan2(2 * q0 * q3 + q1 * q2, 1 - 2 * (q2 * q2 + q3 * q3));
 
-  // // theta = camZ > 0 ? theta : -theta + PI;
-  // console.log(camZ);
+  theta = camZ > 0 ? theta : -theta + PI;
 
-  // // console.log(theta);
+  // console.log(theta);
 
-  textSize(0.5);
   for (let i = 0; i < points.length; i++) {
     push();
     // rotateX(rotation.x);
@@ -72,10 +70,13 @@ window.draw = () => {
 
     translate(points[i].x, points[i].y, points[i].z);
 
-    // rotateY(-theta);
-    // rotateX(-phi);
-    // rotateZ(-psi);
+    rotateY(-theta);
+    //rotateX(phi);
+    //rotateZ(psi);
 
+    let d = dist(camX, camY, camZ, points[i].x, points[i].y, points[i].z);
+
+    textSize(max(0, 100 / (d - 100)));
     text(labels[i], 0, 0);
     pop();
   }
@@ -87,6 +88,14 @@ window.draw = () => {
 
   // if (points.length > 0) noLoop();
 };
+
+function mouseDragged() {
+  let gp;
+  if (b.length != mouseArray) {
+    cam.setRotation(current_rotation, 0);
+    cam.setDistance(zoom);
+  }
+}
 
 (async () => {
   let rawData = JSON.parse(
