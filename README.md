@@ -1,12 +1,24 @@
 # PCA food map
 
-## Setup
+Runs [principal component analysis](https://en.wikipedia.org/wiki/Principal_component_analysis) on people's food preferences to see patterns in food and in
 
-Create a folder called `data` in the root directory and download the survey data as `data/food-survey.csv` (no preprocessing needed).
+## Project strucure
 
-Run `food-pca.ipynb` to get the cool plots.
+## Analysis (`./analysis`)
 
-## Requirements
+This part is in Python and actually runs the PCA.
+
+### Setup
+
+Create a folder called `data` in `./analysis` and download the survey data (from the spreadsheet) as `data/food-survey.csv` (no preprocessing needed).
+
+To get cool plots, run `food-pca.ipynb` and `people-pca.ipynb` with whatever Jupyter notebook tools you use.
+
+### Requirements
 
 - The ability to run Jupyter notebooks
 - Libraries: [numpy](https://numpy.org/), [scikit-learn](https://scikit-learn.org/), and [matplotlib](https://matplotlib.org/)
+
+## Visualization (`./visualization`)
+
+This bit is incomplete.
