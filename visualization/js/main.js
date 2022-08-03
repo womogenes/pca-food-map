@@ -15,7 +15,6 @@ window.preload = () => {
 window.setup = () => {
   canvas = createCanvas(windowWidth, windowHeight, WEBGL);
   canvas.parent('#sketch-container');
-  addScreenPositionFunction();
 
   cam = createEasyCam();
   cam.setRotationConstraint(false, false, false);
@@ -52,19 +51,38 @@ window.draw = () => {
 
   // Labels
   fill('#fff');
-  let rotation = cam.getRotation();
+  // let [camX, camY, camZ] = cam.getPosition();
+
+  // let [q0, q1, q2, q3] = cam.getRotation();
+  // let phi = Math.atan2(2 * (q0 * q1 + q2 * q3), 1 - 2 * (q1 * q1 + q2 * q2));
+  // let theta = Math.asin(2 * (q0 * q2 - q3 * q1));
+  // let psi = Math.atan2(2 * q0 * q3 + q1 * q2, 1 - 2 * (q2 * q2 + q3 * q3));
+
+  // // theta = camZ > 0 ? theta : -theta + PI;
+  // console.log(camZ);
+
+  // // console.log(theta);
+
+  textSize(0.5);
+  for (let i = 0; i < points.length; i++) {
+    push();
+    // rotateX(rotation.x);
+    // rotateY(rotation.y);
+    // rotateZ(rotation.z);
+
+    translate(points[i].x, points[i].y, points[i].z);
+
+    // rotateY(-theta);
+    // rotateX(-phi);
+    // rotateZ(-psi);
+
+    text(labels[i], 0, 0);
+    pop();
+  }
 
   cam.beginHUD();
   textSize(24);
-  for (let i = 0; i < points.length; i++) {
-    push();
-    let { x, y } = screenPosition([points[i][0] * 30, points[i][1] * 30]);
-    text(labels[i], x, y);
-    pop();
-
-    ellipse(x + width, y + height, 100, 100);
-  }
-
+  text(frameRate(), 50, 50);
   cam.endHUD();
 
   // if (points.length > 0) noLoop();
