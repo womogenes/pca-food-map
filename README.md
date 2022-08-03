@@ -12,7 +12,7 @@ This part is in Python and actually runs the PCA.
 
 Create a folder called `data` in `./analysis` and download the survey data (from the spreadsheet) as `data/food-survey.csv` (no preprocessing needed).
 
-To get cool plots, run `food-pca.ipynb` and `people-pca.ipynb` with whatever Jupyter notebook tools you use.
+To get cool plots, run `./analysis/food_pca.ipynb` and `./analysis/people_pca.ipynb` with whatever Jupyter notebook tools you use.
 
 ### Requirements
 
