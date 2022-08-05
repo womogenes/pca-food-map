@@ -81,10 +81,10 @@ window.draw = () => {
     pop();
   }
 
-  cam.beginHUD();
-  textSize(24);
-  text(frameRate(), 50, 50);
-  cam.endHUD();
+  // cam.beginHUD();
+  // textSize(24);
+  // text(frameRate(), 50, 50);
+  // cam.endHUD();
 
   // if (points.length > 0) noLoop();
 };
